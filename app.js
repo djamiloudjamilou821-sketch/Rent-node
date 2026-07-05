@@ -1,4 +1,6 @@
 // ================= IMPORTS =================
+require('dotenv').config();
+
 const express = require('express');
 const session = require('express-session');
 const { Pool } = require('pg');
@@ -43,6 +45,7 @@ async function initDB() {
     } catch (err) {
         console.error("❌ Error initializing database:", err);
     }
+        
 }
 initDB();
 
