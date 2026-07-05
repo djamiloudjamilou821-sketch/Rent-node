@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Confirm_delete</title>
+<style>
+body {
+    font-family: Arial;
+    background: #f4f6f9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.box {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 320px;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+input {
+    width: 100%;
+    padding: 12px;
+    margin: 8px 0;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    outline: none;
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    background: #1f4fff;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #1740cc;
+}
+
+.password-box {
+    position: relative;
+}
+
+.eye {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    font-size: 18px;
+}
+</style>
+
+</head>
+<body>
+<div class="profile-container">
+    <h2>⚠ Delete Renter</h2>
+
+    <p>Enter admin password to confirm deletion</p>
+
+    <form method="POST">
+        <div style="position:relative;">
+            <input type="password" name="password" id="payPassword" placeholder="Admin password"
+                style="width:100%; padding:12px; border-radius:10px; border:1px solid #ccc;">
+
+            <span onclick="togglePayPassword()" 
+                style="position:absolute; right:10px; top:12px; cursor:pointer;">
+                👁️
+            </span>
+        </div>
+
+        <button type="submit" style="background:red;color:white;">
+            Confirm Delete
+        </button>
+
+         <a href="/renters" style="display:inline-block; margin-bottom:10px;  margin-left:10px;
+        background:#2c3e50; color:white; padding:8px 12px;
+        border-radius:6px; text-decoration:none;">
+        Cancel
+        </a>
+    </form>
+
+</div>
+<script>
+function togglePayPassword() {
+    let input = document.getElementById("payPassword");
+    input.type = (input.type === "password") ? "text" : "password";
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Payment</title>
+
+    <link rel="stylesheet" href="/style.css">
+
+<style>
+body {
+    font-family: Arial;
+    background: #f4f6f9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.profile-container {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 320px;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+input {
+    width: 100%;
+    padding: 12px;
+    margin: 8px 0;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    outline: none;
+    box-sizing: border-box;
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    background: #1f4fff;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #1740cc;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="profile-container">
+
+    <h2>Add Payment</h2>
+
+    <p><strong>Renter:</strong> <%= renter.name %></p>
+
+    <p><strong>Amount:</strong> <%= 1000 %> CFA</p>
+
+    <p><strong><%= dueInfo %></strong></p>
+
+    <% if (debt > 0) { %>
+
+        <p style="color:red;">
+            ❗ You still owe <%= debt %> CFA
+        </p>
+
+    <% } else { %>
+
+        <p style="color:green;">
+            ✔ No debt
+        </p>
+
+    <% } %>
+
+    <form method="POST">
+
+        <input type="hidden" name="amount" value="1000">
+
+        <div style="position:relative;">
+
+            <input
+                type="password"
+                name="password"
+                id="payPassword"
+                placeholder="Admin password">
+
+            <span
+                onclick="togglePayPassword()"
+                style="position:absolute;right:10px;top:12px;cursor:pointer;">
+                👁️
+            </span>
+
+        </div>
+
+        <% if (debt <= 0 && already_paid) { %>
+
+            <button
+                disabled
+                style="background:gray;">
+                ✔ Already Paid This Week
+            </button>
+
+        <% } else { %>
+
+            <button
+                type="submit"
+                style="background:green;">
+                💳 Save Payment
+            </button>
+
+        <% } %>
+
+    </form>
+
+    <br>
+
+    <a href="/renters"
+       style="display:inline-block;
+              background:#2c3e50;
+              color:white;
+              padding:8px 12px;
+              border-radius:6px;
+              text-decoration:none;">
+        Cancel
+    </a>
+
+</div>
+
+<script>
+function togglePayPassword() {
+    const input = document.getElementById("payPassword");
+    input.type = input.type === "password" ? "text" : "password";
+}
+</script>
+
+</body>
+</html>

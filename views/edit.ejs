@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Renter</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            background: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .box {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            width: 350px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            box-sizing: border-box;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background: black;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        a {
+            display: inline-block;
+            margin-top: 10px;
+            background: #2c3e50;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 6px;
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="box">
+
+    <h2>✏ Edit Renter</h2>
+
+    <form method="POST">
+
+        <input
+            type="text"
+            name="name"
+            value="<%= renter.name %>"
+            required>
+
+        <input
+            type="text"
+            name="phone"
+            value="<%= renter.phone %>"
+            required>
+
+        <input
+            type="text"
+            name="address"
+            value="<%= renter.address %>"
+            required>
+
+        <div style="position:relative;">
+
+            <input
+                type="password"
+                name="password"
+                id="payPassword"
+                placeholder="Admin password"
+                style="width:100%; padding:12px; border-radius:10px; border:1px solid #ccc;">
+
+            <span
+                onclick="togglePayPassword()"
+                style="position:absolute; right:10px; top:12px; cursor:pointer;">
+                👁️
+            </span>
+
+        </div>
+
+        <button type="submit">Update</button>
+
+        <a href="/renters">
+            Cancel
+        </a>
+
+    </form>
+
+</div>
+
+<script>
+function togglePayPassword() {
+    let input = document.getElementById("payPassword");
+    input.type = (input.type === "password") ? "text" : "password";
+}
+</script>
+
+</body>
+</html>

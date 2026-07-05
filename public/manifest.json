@@ -1,0 +1,20 @@
+{
+    "name": "Rental Manager",
+    "short_name": "RentApp",
+    "start_url": "/dashboard",
+    "display": "standalone",
+    "background_color": "#f4f6f9",
+    "theme_color": "#1f4fff",
+    "icons": [
+        {
+            "src": "/static/icon.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "/static/icon.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ]
+}

@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rental Management System | Professional Suite</title>
+    
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            200: '#bfdbfe',
+                            300: '#93c5fd',
+                            400: '#60a5fa',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            800: '#1e40af',
+                            900: '#1e3a8a',
+                        },
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        .custom-shadow {
+            box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05), 0 2px 10px -2px rgba(0, 0, 0, 0.03);
+        }
+        .hero-gradient {
+            background: radial-gradient(circle at top right, #3b82f6, #1e40af);
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .feature-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .feature-card:hover {
+            transform: translateY(-8px);
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900 font-sans antialiased">
+
+    <!-- Hero Section -->
+    <section class="hero-gradient min-h-[70vh] flex items-center justify-center px-6 py-20 text-white relative overflow-hidden">
+        <!-- Abstract Shapes -->
+        <div class="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none opacity-20">
+            <div class="absolute -top-24 -left-24 w-96 h-96 bg-white rounded-full blur-3xl"></div>
+            <div class="absolute bottom-0 right-0 w-80 h-80 bg-blue-400 rounded-full blur-3xl"></div>
+        </div>
+
+        <div class="max-w-4xl mx-auto text-center relative z-10">
+            <div class="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-md rounded-full border border-white/20 text-sm font-medium mb-8">
+                <span class="flex h-2 w-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                v2.0 Professional Suite
+            </div>
+            
+            <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight mb-6 leading-tight">
+                Modern <span class="text-blue-200">Rental</span> Management Made Simple
+            </h1>
+            
+            <p class="text-lg md:text-xl text-blue-100 mb-10 max-w-2xl mx-auto leading-relaxed opacity-90">
+                The all-in-one solution to manage your renters, track payments, and optimize your income with real-time financial insights.
+            </p>
+            
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <a href="/dashboard" class="group flex items-center gap-3 bg-white text-brand-700 px-8 py-4 rounded-2xl font-bold text-lg hover:bg-brand-50 transition-all shadow-xl shadow-blue-900/20 active:scale-95">
+                    <i class="fa-solid fa-rocket group-hover:animate-bounce"></i>
+                    Go to Dashboard
+                </a>
+                <a href="#features" class="flex items-center gap-3 bg-white/10 backdrop-blur-md border border-white/20 px-8 py-4 rounded-2xl font-bold text-lg hover:bg-white/20 transition-all active:scale-95">
+                    Explore Features
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Bar -->
+    <div class="max-w-5xl mx-auto px-6 -mt-10 relative z-20">
+        <div class="bg-white rounded-3xl p-8 custom-shadow grid grid-cols-1 md:grid-cols-3 gap-8 border border-slate-100">
+            <div class="flex items-center gap-4">
+                <div class="w-12 h-12 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center text-xl">
+                    <i class="fa-solid fa-shield-check"></i>
+                </div>
+                <div>
+                    <h4 class="font-bold text-slate-800">Secure Data</h4>
+                    <p class="text-xs text-slate-500">End-to-end encrypted</p>
+                </div>
+            </div>
+            <div class="flex items-center gap-4">
+                <div class="w-12 h-12 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center text-xl">
+                    <i class="fa-solid fa-bolt"></i>
+                </div>
+                <div>
+                    <h4 class="font-bold text-slate-800">Fast Sync</h4>
+                    <p class="text-xs text-slate-500">Real-time updates</p>
+                </div>
+            </div>
+            <div class="flex items-center gap-4">
+                <div class="w-12 h-12 rounded-2xl bg-amber-50 text-amber-600 flex items-center justify-center text-xl">
+                    <i class="fa-solid fa-mobile-screen"></i>
+                </div>
+                <div>
+                    <h4 class="font-bold text-slate-800">PWA Ready</h4>
+                    <p class="text-xs text-slate-500">Install as an app</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Features Section -->
+    <section id="features" class="py-24 px-6">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-extrabold text-slate-900 mb-4">Powerful Features</h2>
+                <div class="h-1.5 w-20 bg-brand-600 mx-auto rounded-full"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Feature 1 -->
+                <div class="feature-card bg-white p-8 rounded-[2rem] border border-slate-100 custom-shadow">
+                    <div class="w-14 h-14 rounded-2xl bg-brand-600 text-white flex items-center justify-center text-2xl mb-6 shadow-lg shadow-brand-200">
+                        <i class="fa-solid fa-chart-pie"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-3">Smart Dashboard</h3>
+                    <p class="text-slate-600 leading-relaxed text-sm">
+                        Get a birds-eye view of your entire business. Monitor active renters, track pending payments, and identify overdue accounts at a glance.
+                    </p>
+                </div>
+
+                <!-- Feature 2 -->
+                <div class="feature-card bg-white p-8 rounded-[2rem] border border-slate-100 custom-shadow">
+                    <div class="w-14 h-14 rounded-2xl bg-emerald-600 text-white flex items-center justify-center text-2xl mb-6 shadow-lg shadow-emerald-200">
+                        <i class="fa-solid fa-money-bill-trend-up"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-3">Revenue Tracking</h3>
+                    <p class="text-slate-600 leading-relaxed text-sm">
+                        Keep your finances in check with detailed collection reports. Know exactly how much money is collected, pending, and expected each week.
+                    </p>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="feature-card bg-white p-8 rounded-[2rem] border border-slate-100 custom-shadow">
+                    <div class="w-14 h-14 rounded-2xl bg-indigo-600 text-white flex items-center justify-center text-2xl mb-6 shadow-lg shadow-indigo-200">
+                        <i class="fa-solid fa-layer-group"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-3">Effortless Management</h3>
+                    <p class="text-slate-600 leading-relaxed text-sm">
+                        Add, edit, and manage renter profiles with ease. Our mobile-first interface ensures you can manage your business from anywhere.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 px-6 bg-slate-900 text-white text-center overflow-hidden relative">
+        <div class="max-w-3xl mx-auto relative z-10">
+            <h2 class="text-3xl md:text-4xl font-bold mb-6">Ready to streamline your business?</h2>
+            <p class="text-slate-400 mb-10 text-lg">Join dozens of landlords who have simplified their rental management today.</p>
+            <a href="/dashboard" class="inline-block bg-brand-600 text-white px-10 py-4 rounded-2xl font-bold text-lg hover:bg-brand-700 transition-all shadow-xl shadow-brand-900/20">
+                Get Started Now
+            </a>
+        </div>
+        <!-- Decorative background -->
+        <div class="absolute top-0 right-0 w-64 h-64 bg-brand-600/10 rounded-full -mr-32 -mt-32 blur-3xl"></div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 px-6 bg-white border-t border-slate-100 text-center">
+        <div class="max-w-6xl mx-auto">
+            <p class="text-slate-400 text-sm font-medium">© 2026 Rental Management System. All rights reserved.</p>
+        </div>
+    </footer>
+
+</body>
+</html>

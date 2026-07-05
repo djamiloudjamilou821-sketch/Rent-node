@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Financial Insights | Money Dashboard</title>
+    
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            200: '#bfdbfe',
+                            300: '#93c5fd',
+                            400: '#60a5fa',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            800: '#1e40af',
+                            900: '#1e3a8a',
+                        },
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        .custom-shadow {
+            box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05), 0 2px 10px -2px rgba(0, 0, 0, 0.03);
+        }
+        .chart-bg {
+            background: linear-gradient(135deg, #3b82f6 0%, #1e40af 100%);
+        }
+        .stat-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .stat-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900 font-sans antialiased min-h-screen">
+
+    <!-- Top Navigation -->
+    <nav class="bg-white border-b border-slate-200 sticky top-0 z-30 px-4 py-4 md:px-8">
+        <div class="max-w-5xl mx-auto flex justify-between items-center">
+            <div class="flex items-center gap-4">
+                <a href="/dashboard" class="flex items-center justify-center w-10 h-10 rounded-xl bg-slate-100 text-slate-600 hover:bg-brand-50 hover:text-brand-600 transition-all">
+                    <i class="fa-solid fa-arrow-left"></i>
+                </a>
+                <h1 class="text-xl font-bold text-slate-800 tracking-tight">Money Dashboard</h1>
+            </div>
+            <div class="text-slate-400">
+                <i class="fa-solid fa-circle-info text-lg"></i>
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-5xl mx-auto p-4 md:p-8">
+        
+        <!-- Summary Header Card -->
+        <div class="chart-bg rounded-[2rem] p-8 mb-8 text-white relative overflow-hidden shadow-xl shadow-blue-200">
+            <div class="relative z-10">
+                <p class="text-blue-100 text-sm font-medium opacity-80 mb-1 uppercase tracking-wider">Total Expected Revenue</p>
+                <h2 class="text-4xl font-black mb-6"><%= expected_money || 0 %> <span class="text-xl font-normal opacity-70">CFA</span></h2>
+                
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="bg-white/10 backdrop-blur-md rounded-2xl p-4 border border-white/10">
+                        <p class="text-blue-100 text-[10px] uppercase font-bold mb-1">Collected</p>
+                        <p class="text-xl font-bold"><%= collected_money || 0 %> <span class="text-xs font-normal opacity-60">CFA</span></p>
+                    </div>
+                    <div class="bg-white/10 backdrop-blur-md rounded-2xl p-4 border border-white/10">
+                        <p class="text-blue-100 text-[10px] uppercase font-bold mb-1">Pending</p>
+                        <p class="text-xl font-bold"><%= (expected_money || 0) - (collected_money || 0) %> <span class="text-xs font-normal opacity-60">CFA</span></p>
+                    </div>
+                </div>
+            </div>
+            <!-- Decorative Background Elements -->
+            <div class="absolute -bottom-10 -right-10 w-48 h-48 bg-white/10 rounded-full blur-3xl"></div>
+            <div class="absolute top-0 right-0 p-8 opacity-20">
+                <i class="fa-solid fa-chart-line text-8xl"></i>
+            </div>
+        </div>
+
+        <!-- Section Title -->
+        <div class="flex items-center justify-between mb-6 px-1">
+            <h3 class="font-bold text-slate-800 text-lg">Financial Breakdown</h3>
+            <span class="text-xs font-medium text-slate-400 italic">Updated just now</span>
+        </div>
+
+        <!-- Grid Stats -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mb-10">
+            
+            <!-- Renters Overview -->
+            <div class="bg-white p-6 rounded-2xl border border-slate-100 custom-shadow stat-card">
+                <div class="flex items-center gap-4 mb-4">
+                    <div class="w-12 h-12 rounded-2xl bg-brand-50 text-brand-600 flex items-center justify-center text-xl">
+                        <i class="fa-solid fa-users"></i>
+                    </div>
+                    <div>
+                        <p class="text-slate-500 text-xs font-semibold uppercase tracking-tight">Total Renters</p>
+                        <p class="text-2xl font-bold text-slate-900"><%= total_renters || 0 %></p>
+                    </div>
+                </div>
+                <div class="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
+                    <div class="bg-brand-500 h-full rounded-full" style="width: 100%"></div>
+                </div>
+            </div>
+
+            <!-- Paid Renters -->
+            <div class="bg-white p-6 rounded-2xl border border-slate-100 custom-shadow stat-card">
+                <div class="flex items-center gap-4 mb-4">
+                    <div class="w-12 h-12 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center text-xl">
+                        <i class="fa-solid fa-circle-check"></i>
+                    </div>
+                    <div>
+                        <p class="text-slate-500 text-xs font-semibold uppercase tracking-tight">Paid Renters</p>
+                        <p class="text-2xl font-bold text-slate-900"><%= paid_renters || 0 %></p>
+                    </div>
+                </div>
+                <% let paidPercent = total_renters > 0 ? (paid_renters / total_renters * 100) : 0; %>
+                <div class="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
+                    <div class="bg-emerald-500 h-full rounded-full" style="width: <%= paidPercent %>%"></div>
+                </div>
+                <p class="text-[10px] text-slate-400 mt-2 font-medium"><%= Math.round(paidPercent) %>% of total collection completed</p>
+            </div>
+
+            <!-- Overdue Renters -->
+            <div class="bg-white p-6 rounded-2xl border border-slate-100 custom-shadow stat-card">
+                <div class="flex items-center gap-4 mb-4">
+                    <div class="w-12 h-12 rounded-2xl bg-rose-50 text-rose-600 flex items-center justify-center text-xl">
+                        <i class="fa-solid fa-circle-xmark"></i>
+                    </div>
+                    <div>
+                        <p class="text-slate-500 text-xs font-semibold uppercase tracking-tight">Overdue Renters</p>
+                        <p class="text-2xl font-bold text-slate-900"><%= overdue_renters || 0 %></p>
+                    </div>
+                </div>
+                <% let overduePercent = total_renters > 0 ? (overdue_renters / total_renters * 100) : 0; %>
+                <div class="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
+                    <div class="bg-rose-500 h-full rounded-full" style="width: <%= overduePercent %>%"></div>
+                </div>
+                <p class="text-[10px] text-rose-500 mt-2 font-medium">Action required for <%= overdue_renters %> accounts</p>
+            </div>
+
+            <!-- Weekly Fee Card -->
+            <div class="bg-white p-6 rounded-2xl border border-slate-100 custom-shadow stat-card">
+                <div class="flex items-center gap-4">
+                    <div class="w-12 h-12 rounded-2xl bg-amber-50 text-amber-600 flex items-center justify-center text-xl">
+                        <i class="fa-solid fa-calendar-week"></i>
+                    </div>
+                    <div>
+                        <p class="text-slate-500 text-xs font-semibold uppercase tracking-tight">Weekly Fee</p>
+                        <p class="text-2xl font-bold text-slate-900"><%= weekly_fee || 0 %> <span class="text-sm font-normal text-slate-400">CFA</span></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Collection Efficiency -->
+            <div class="bg-white p-6 rounded-2xl border border-slate-100 custom-shadow stat-card lg:col-span-2">
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-2xl bg-indigo-50 text-indigo-600 flex items-center justify-center text-xl">
+                            <i class="fa-solid fa-percent"></i>
+                        </div>
+                        <div>
+                            <p class="text-slate-500 text-xs font-semibold uppercase tracking-tight">Collection Efficiency</p>
+                            <% let collectionEff = expected_money > 0 ? (collected_money / expected_money * 100) : 0; %>
+                            <p class="text-2xl font-bold text-slate-900"><%= Math.round(collectionEff) %>%</p>
+                        </div>
+                    </div>
+                    <div class="flex-1 max-w-xs">
+                        <div class="w-full bg-slate-100 h-3 rounded-full overflow-hidden">
+                            <div class="bg-indigo-500 h-full rounded-full transition-all duration-1000" style="width: <%= collectionEff %>%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+  
+    </main>
+
+</body>
+</html>

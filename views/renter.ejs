@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Renter Profile</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            background:#f4f6f9;
+            padding:20px;
+        }
+
+        .profile-container {
+            max-width: 750px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+        }
+
+        .header {
+            text-align: center;
+        }
+
+        .phone, .address {
+            color: #555;
+        }
+
+        .box {
+            margin-top: 15px;
+            padding: 10px;
+            background: #f9f9f9;
+            border-radius: 8px;
+        }
+
+        .pay-btn {
+            background: #1f4fff;
+            color: white;
+            padding: 12px 18px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .pay-btn:hover {
+            background: #0d35cc;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        th, td {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+            text-align: left;
+        }
+
+        th {
+            background: #333;
+            color: white;
+        }
+
+        .amount {
+            color: green;
+            font-weight: bold;
+        }
+
+        .none {
+            color: gray;
+        }
+
+        .back {
+            display: inline-block;
+            margin-top: 20px;
+            background: #2c3e50;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 6px;
+            text-decoration: none;
+        }
+
+        .danger {
+            color: red;
+            font-weight: bold;
+        }
+
+        .ok {
+            color: green;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="profile-container">
+
+    <!-- HEADER -->
+    <div class="header">
+        <h2><%= renter.name %></h2>
+        <p class="phone">📞 <%= renter.phone %></p>
+        <p class="address">📍 <%= renter.address %></p>
+    </div>
+
+    <!-- INFO -->
+    <div class="box">
+        <p><strong>📅 Start Date:</strong> <%= renter.start_date %></p>
+
+        <p><strong>⏳ Due Info:</strong> <%= dueInfo %></p>
+
+        <p><strong>💰 Debt:</strong>
+            <% if (debt > 0) { %>
+                <span class="danger"><%= debt %> CFA</span>
+            <% } else { %>
+                <span class="ok">0 CFA</span>
+            <% } %>
+        </p>
+    </div>
+
+    <!-- PAY BUTTON -->
+    <div style="margin-top:15px;">
+        <a href="/pay/<%= renter.id %>">
+            <button class="pay-btn">💳 Make Payment</button>
+        </a>
+    </div>
+
+    <!-- SUMMARY -->
+    <div class="box">
+        <h3>📊 Summary</h3>
+
+        <p><strong>Total Paid:</strong>
+            <%= total_paid %> CFA
+        </p>
+
+        <p><strong>Total Payments:</strong>
+            <%= total_payments %>
+        </p>
+
+        <p><strong>Last Payment:</strong>
+            <% if (last_payment) { %>
+                <%= last_payment %>
+            <% } else { %>
+                <span class="none">None</span>
+            <% } %>
+        </p>
+    </div>
+
+    <!-- HISTORY -->
+    <div class="box">
+        <h3>💳 Payment History</h3>
+
+        <% if (payments && payments.length > 0) { %>
+
+        <table>
+            <tr>
+                <th>#</th>
+                <th>Amount</th>
+                <th>Date</th>
+            </tr>
+
+            <% payments.forEach((p, index) => { %>
+            <tr>
+                <td><%= index + 1 %></td>
+                <td class="amount"><%= p.amount %> CFA</td>
+                <td><%= p.payment_date %></td>
+            </tr>
+            <% }) %>
+
+        </table>
+
+        <% } else { %>
+            <p class="none">No payment history found</p>
+        <% } %>
+
+    </div>
+
+    <!-- BACK -->
+    <a href="/dashboard" class="back">⬅ Back to Dashboard</a>
+
+</div>
+
+</body>
+</html>

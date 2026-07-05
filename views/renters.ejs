@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Renters List | Management</title>
+    
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome for Professional Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            200: '#bfdbfe',
+                            300: '#93c5fd',
+                            400: '#60a5fa',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            800: '#1e40af',
+                            900: '#1e3a8a',
+                        },
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            -webkit-tap-highlight-color: transparent;
+        }
+        .custom-shadow {
+            box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05), 0 2px 10px -2px rgba(0, 0, 0, 0.03);
+        }
+        /* Mobile-friendly table scroll */
+        .table-container {
+            -webkit-overflow-scrolling: touch;
+        }
+        @media (max-width: 768px) {
+            .desktop-only { display: none; }
+            .mobile-card-view { display: block; }
+            .desktop-table-view { display: none; }
+        }
+        @media (min-width: 769px) {
+            .mobile-card-view { display: none; }
+            .desktop-table-view { display: block; }
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900 font-sans antialiased min-h-screen">
+
+    <!-- Top Navigation Bar -->
+    <nav class="bg-white border-b border-slate-200 sticky top-0 z-30 px-4 py-4 md:px-8">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="flex items-center gap-4">
+                <a href="/dashboard" class="flex items-center justify-center w-10 h-10 rounded-xl bg-slate-100 text-slate-600 hover:bg-brand-50 hover:text-brand-600 transition-all">
+                    <i class="fa-solid fa-arrow-left"></i>
+                </a>
+                <h1 class="text-xl font-bold text-slate-800 tracking-tight">Renters List</h1>
+            </div>
+            <a href="/add" class="hidden md:flex items-center gap-2 bg-brand-600 text-white px-5 py-2.5 rounded-xl font-semibold hover:bg-brand-700 transition-all shadow-md shadow-brand-200">
+                <i class="fa-solid fa-plus text-sm"></i>
+                <span>Add New Renter</span>
+            </a>
+        </div>
+    </nav>
+
+    <main class="max-w-7xl mx-auto p-4 md:p-8">
+        
+        <!-- Header Info & Search Placeholder -->
+        <div class="mb-8 flex flex-col md:flex-row md:items-center justify-between gap-4">
+            <div>
+                <p class="text-slate-500 text-sm">Managing <%= renters.length %> active records</p>
+            </div>
+            <div class="relative w-full md:w-72">
+                <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i>
+                <input type="text" placeholder="Quick search..." class="w-full pl-10 pr-4 py-2.5 bg-white border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-brand-500 focus:border-transparent outline-none transition-all">
+            </div>
+        </div>
+
+        <!-- Desktop Table View -->
+        <div class="desktop-table-view bg-white rounded-2xl border border-slate-200 overflow-hidden custom-shadow">
+            <table class="w-full text-left border-collapse">
+                <thead>
+                    <tr class="bg-slate-50/80 border-b border-slate-200">
+                        <th class="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider">Renter Details</th>
+                        <th class="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider">Address</th>
+                        <th class="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider">Due Info</th>
+                        <th class="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider">Balance</th>
+                        <th class="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider text-right">Actions</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-100">
+                    <% renters.forEach(r => { %>
+                    <tr class="hover:bg-slate-50/50 transition-colors">
+                        <td class="px-6 py-5">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-full bg-brand-100 text-brand-700 flex items-center justify-center font-bold text-sm">
+                                    <%= r.name.charAt(0).toUpperCase() %>
+                                </div>
+                                <div>
+                                    <div class="font-bold text-slate-900"><%= r.name %></div>
+                                    <div class="text-xs text-slate-500"><%= r.phone %></div>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="px-6 py-5">
+                            <span class="text-sm text-slate-600"><%= r.address %></span>
+                        </td>
+                        <td class="px-6 py-5">
+                            <span class="text-sm font-medium text-slate-700"><%= r.dueInfo %></span>
+                        </td>
+                        <td class="px-6 py-5">
+                            <% if (r.debt > 0) { %>
+                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-rose-50 text-rose-700 border border-rose-100">
+                                    <%= r.debt %> CFA
+                                </span>
+                            <% } else { %>
+                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-emerald-50 text-emerald-700 border border-emerald-100">
+                                    0 CFA
+                                </span>
+                            <% } %>
+                        </td>
+                        <td class="px-6 py-5 text-right">
+                            <div class="flex justify-end gap-2">
+                                <a href="/renter/<%= r.id %>" class="p-2 text-slate-400 hover:text-brand-600 transition-colors" title="View">
+                                    <i class="fa-solid fa-eye"></i>
+                                </a>
+                                <a href="/edit/<%= r.id %>" class="p-2 text-slate-400 hover:text-amber-600 transition-colors" title="Edit">
+                                    <i class="fa-solid fa-pen-to-square"></i>
+                                </a>
+                                <a href="/delete/<%= r.id %>" onclick="return confirm('Delete this renter?')" class="p-2 text-slate-400 hover:text-rose-600 transition-colors" title="Delete">
+                                    <i class="fa-solid fa-trash-can"></i>
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Mobile Card View -->
+        <div class="mobile-card-view space-y-4">
+            <% renters.forEach(r => { %>
+            <div class="bg-white rounded-2xl p-5 border border-slate-200 custom-shadow">
+                <div class="flex justify-between items-start mb-4">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-brand-600 text-white flex items-center justify-center font-bold">
+                            <%= r.name.charAt(0).toUpperCase() %>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-slate-900"><%= r.name %></h3>
+                            <p class="text-xs text-slate-500"><%= r.phone %></p>
+                        </div>
+                    </div>
+                    <% if (r.debt > 0) { %>
+                        <span class="bg-rose-50 text-rose-700 text-[10px] font-bold px-2 py-0.5 rounded border border-rose-100">OWES</span>
+                    <% } else { %>
+                        <span class="bg-emerald-50 text-emerald-700 text-[10px] font-bold px-2 py-0.5 rounded border border-emerald-100">CLEAR</span>
+                    <% } %>
+                </div>
+
+                <div class="space-y-2 mb-4">
+                    <div class="flex text-sm">
+                        <span class="text-slate-400 w-20">Address:</span>
+                        <span class="text-slate-700 flex-1"><%= r.address %></span>
+                    </div>
+                    <div class="flex text-sm">
+                        <span class="text-slate-400 w-20">Due Date:</span>
+                        <span class="text-slate-700 flex-1 font-medium"><%= r.dueInfo %></span>
+                    </div>
+                    <div class="flex text-sm">
+                        <span class="text-slate-400 w-20">Balance:</span>
+                        <span class="font-bold <%= r.debt > 0 ? 'text-rose-600' : 'text-emerald-600' %>">
+                            <%= r.debt %> CFA
+                        </span>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-3 gap-2 pt-4 border-t border-slate-100">
+                    <a href="/renter/<%= r.id %>" class="flex items-center justify-center gap-2 py-2 bg-slate-50 text-slate-600 rounded-lg text-xs font-semibold">
+                        <i class="fa-solid fa-eye text-[10px]"></i> View
+                    </a>
+                    <a href="/edit/<%= r.id %>" class="flex items-center justify-center gap-2 py-2 bg-slate-50 text-slate-600 rounded-lg text-xs font-semibold">
+                        <i class="fa-solid fa-pen text-[10px]"></i> Edit
+                    </a>
+                    <a href="/delete/<%= r.id %>" onclick="return confirm('Delete this renter?')" class="flex items-center justify-center gap-2 py-2 bg-rose-50 text-rose-600 rounded-lg text-xs font-semibold">
+                        <i class="fa-solid fa-trash text-[10px]"></i> Delete
+                    </a>
+                </div>
+            </div>
+            <% }) %>
+        </div>
+
+    </main>
+
+    <!-- Mobile Floating Add Button -->
+    <a href="/add" class="md:hidden fixed bottom-6 right-6 w-14 h-14 bg-brand-600 text-white rounded-2xl shadow-xl flex items-center justify-center text-2xl z-40 active:scale-90 transition-transform">
+        <i class="fa-solid fa-plus"></i>
+    </a>
+
+</body>
+</html>
