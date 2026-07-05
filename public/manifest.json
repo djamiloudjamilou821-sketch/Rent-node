@@ -1,7 +1,7 @@
 {
   "name": "Rental Manager",
   "short_name": "RentApp",
-  "start_url": "/",
+  "start_url": "/dashboard",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#1f4fff",
